@@ -11,9 +11,9 @@
             <property name="javax.persistence.jdbc.password" value="coderslab" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.schema-generation.database.action"
-                      value="none"/>
+                      value="drop-and-create"/>
 
-            <!-- do grupy walidatorow -->
+            <!-- do grupy walidatorow PRZY ZAPISIE DO DB-->
             <property name="javax.persistence.validation.mode" value="none" />
 
             <!-- slajd 14 -->

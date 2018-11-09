@@ -2,30 +2,32 @@ package pl.coderslab.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Objects;
 
 @Entity
-@Table(name = "tweeter_user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
-    private String firstName;
+    private String userName;
 
     @NotEmpty
-    private String lastName;
+    private String password;
 
+    @NotEmpty
     @Email
+    @Column(unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Tweet> tweets = new ArrayList<>();
-
+    //TODO: w razie w duzy Boolean
+    private boolean enabled;
 
 
     //Bezargumentowy konstruktor oznaczony jako public lub protected.
@@ -45,20 +47,25 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    //haszowanie poza setterem passworda
+    public void setHashedPassword(String password) {
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -69,11 +76,24 @@ public class User {
         this.email = email;
     }
 
-    public List<Tweet> getTweets() {
-        return tweets;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
