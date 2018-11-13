@@ -38,8 +38,9 @@ public class RegistrationController {
             return "register/registrationForm";
         }
 
-        boolean passEqual = registrationDto.getPassword().equals(registrationDto.getPasswordRepeat());
 
+        //TAK SAMO Z MAILEM ZROBIC
+        boolean passEqual = registrationDto.getPassword().equals(registrationDto.getPasswordRepeat());
         if(!passEqual) {
             result.addError(new FieldError("registrationDto", "password", "nietozsame hasla"));
             return "register/registrationForm";
