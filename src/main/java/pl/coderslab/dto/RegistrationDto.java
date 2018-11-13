@@ -1,14 +1,19 @@
 package pl.coderslab.dto;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class RegistrationDto {
 
+    @NotEmpty
     private String login;
 
     @Email
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String passwordRepeat;
 
     public String getLogin() {

@@ -25,7 +25,7 @@ public class RegistrationController {
     private UserRepository userRepository;
 
     @GetMapping
-    public String register(Model model){
+    public String register(Model model) {
         model.addAttribute("registrationDto", new RegistrationDto());
         return "/register/registrationForm";
     }
@@ -37,20 +37,19 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "register/registrationForm";
         }
-
-
+        //TODO
         //TAK SAMO Z MAILEM ZROBIC
         boolean passEqual = registrationDto.getPassword().equals(registrationDto.getPasswordRepeat());
-        if(!passEqual) {
-            result.addError(new FieldError("registrationDto", "password", "nietozsame hasla"));
+        if (!passEqual) {
+            result.addError(new FieldError("registrationDto", "passwordRepeat", "Podane hasła różnią się!"));
             return "register/registrationForm";
         }
-
         if (registrationDto.getPassword().equals(registrationDto.getPasswordRepeat())) {
             User user = new User();
             user.setUserName(registrationDto.getLogin());
             user.setEmail(registrationDto.getEmail());
             user.setHashedPassword(registrationDto.getPassword());
+            user.setEnabled(true);
             userRepository.save(user);
         } else {
             return "register/error";

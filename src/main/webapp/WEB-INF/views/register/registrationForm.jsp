@@ -21,11 +21,14 @@
 
 
     Login: <form:input path="login"/><br>
+    <form:errors path="login"/><br>
     Email: <form:input path="email"/><br>
+    <form:errors path="email"/><br>
     Password: <form:password path="password"/><br>
-    Powtorz pass: <form:password path="passwordRepeat"/><br>
     <form:errors path="password"/><br>
-    <input type="submit" value="zaloguj sie">
+    Powtorz pass: <form:password path="passwordRepeat"/><br>
+    <form:errors path="passwordRepeat"/><br>
+    <input type="submit" value="zarejestruj się">
 </form:form>
 
 </body>

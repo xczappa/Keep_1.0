@@ -16,6 +16,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import pl.coderslab.converter.CategoryConverter;
+import pl.coderslab.converter.PriorityConverter;
 import pl.coderslab.converter.UserConverter;
 
 import javax.persistence.EntityManagerFactory;
@@ -61,11 +63,23 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getUserConverter());
+        registry.addConverter(getPriorityConverter());
+        registry.addConverter(getCategoryConverter());
     }
 
     @Bean
     public UserConverter getUserConverter() {
         return new UserConverter();
+    }
+
+    @Bean
+    public PriorityConverter getPriorityConverter() {
+        return new PriorityConverter();
+    }
+
+    @Bean
+    public CategoryConverter getCategoryConverter() {
+        return new CategoryConverter();
     }
 
 

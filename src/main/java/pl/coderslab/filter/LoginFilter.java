@@ -29,7 +29,6 @@ public class LoginFilter implements Filter {
             httpServletResponse.sendRedirect("/login");
         }
 
-
         //System.out.println("FILTER OUT");
 
     }

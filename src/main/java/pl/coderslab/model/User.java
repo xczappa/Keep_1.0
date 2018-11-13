@@ -6,6 +6,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +27,9 @@ public class User {
     @Email
     @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks;
 
     //TODO: w razie w duzy Boolean
     private boolean enabled;

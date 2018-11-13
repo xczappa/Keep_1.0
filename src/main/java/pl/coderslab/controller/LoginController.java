@@ -31,11 +31,11 @@ public class LoginController {
         if (user == null) {
             return "login/error";
         }
-
         String userPassowrd = user.getPassword();
         boolean checkpw = BCrypt.checkpw(loginDto.getPassword(), userPassowrd);
         if (checkpw) {
             request.getSession(true).setAttribute("loggedIn", true);
+            request.getSession(true).setAttribute("userId", user.getId());
             return "redirect:/app/home";
         }else {
             return "login/error";
