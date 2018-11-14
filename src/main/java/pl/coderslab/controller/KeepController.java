@@ -25,7 +25,6 @@ public class KeepController {
 
     @GetMapping
     public String listTasks(Model model) {
-        //taskRepository.findAll(Sort sort);
         model.addAttribute("categories", categoryRepository.findAll());
         return "keep";
     }

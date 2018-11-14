@@ -23,6 +23,7 @@ public class Task {
     private LocalDate created;
     private LocalDate updated;
     private LocalDate completed;
+    private LocalDate deadLine;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -109,6 +110,14 @@ public class Task {
 
     public void setCompleted(LocalDate completed) {
         this.completed = completed;
+    }
+
+    public LocalDate getDeadLine() {
+        return deadLine;
+    }
+
+    public void setDeadLine(LocalDate deadLine) {
+        this.deadLine = deadLine;
     }
 
     @Override

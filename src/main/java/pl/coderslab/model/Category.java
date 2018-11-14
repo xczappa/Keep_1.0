@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +18,7 @@ public class Category {
     private Long id;
 
     @NotEmpty
+    @Size(min = 3, max = 20)
     private String title;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
