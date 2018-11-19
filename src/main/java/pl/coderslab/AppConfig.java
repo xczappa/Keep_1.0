@@ -83,13 +83,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     }
 
 
-    //VALIDACJA
+
     @Bean(name="localeResolver")
     public LocaleContextResolver getLocaleContextResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(new Locale("pl","PL"));
         return localeResolver; }
 
+    //VALIDACJA
     @Bean
     public Validator validator() {
         return new LocalValidatorFactoryBean();

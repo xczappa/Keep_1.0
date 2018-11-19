@@ -3,9 +3,12 @@ package pl.coderslab.model;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.coderslab.repository.TaskRepository;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +16,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +32,8 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user")
-    private List<Task> tasks;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Task> tasks = new ArrayList<>();
 
     //TODO: w razie w duzy Boolean
     private boolean enabled;
@@ -43,6 +47,16 @@ public class User {
 
     //TODO??
 
+    public int getActiveTasksCountt() {
+        final int[] counter = new int[1] ;
+        tasks.forEach(item-> {
+            if(item.getActive()){
+                int x = counter[0];
+                counter[0] = ++x;
+            }
+        });
+        return counter[0];
+    }
 
     public Long getId() {
         return id;
@@ -88,6 +102,17 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+
+
 
     @Override
     public boolean equals(Object o) {

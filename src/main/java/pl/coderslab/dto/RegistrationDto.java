@@ -5,15 +5,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class RegistrationDto {
 
-    @NotEmpty
+    @NotEmpty(message = "Pole nie może być puste")
     private String login;
 
-    @Email
-    @NotEmpty
+    @Email(message = "Niepoprawna forma adresu email")
+    @NotEmpty(message = "Pole nie może być puste")
     private String email;
-    @NotEmpty
+    @NotEmpty(message = "Pole nie może być puste")
     private String password;
-    @NotEmpty
+    @NotEmpty(message = "Pole nie może być puste")
     private String passwordRepeat;
 
     public String getLogin() {

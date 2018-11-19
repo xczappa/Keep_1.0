@@ -14,22 +14,26 @@
 </head>
 <body>
 
-<h1>rejestracja</h1>
+<div align="center">
+
+    <br>
+
+    <h2>Rejestracja nowego użytkownika</h2>
 
 
-<form:form method="post" modelAttribute="registrationDto">
+    <form:form method="post" modelAttribute="registrationDto">
+        Login: <form:input path="login"/><br>
+        <form:errors path="login"/><br>
+        Email: <form:input path="email"/><br>
+        <form:errors path="email"/><br>
+        Password: <form:password path="password"/><br>
+        <form:errors path="password"/><br>
+        Powtorz pass: <form:password path="passwordRepeat"/><br>
+        <form:errors path="passwordRepeat"/><br>
+        <input type="submit" value="zarejestruj się">
+    </form:form>
 
-
-    Login: <form:input path="login"/><br>
-    <form:errors path="login"/><br>
-    Email: <form:input path="email"/><br>
-    <form:errors path="email"/><br>
-    Password: <form:password path="password"/><br>
-    <form:errors path="password"/><br>
-    Powtorz pass: <form:password path="passwordRepeat"/><br>
-    <form:errors path="passwordRepeat"/><br>
-    <input type="submit" value="zarejestruj się">
-</form:form>
+</div>
 
 </body>
 </html>

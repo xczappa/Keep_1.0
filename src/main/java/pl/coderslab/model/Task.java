@@ -1,11 +1,11 @@
 package pl.coderslab.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.stereotype.Controller;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -15,30 +15,48 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
-    @Size(min = 1, max = 99)
+    @Size(min = 1, max = 99, message = "Wpisz przynajmniej jeden znak (max. 99)")
     private String text;
 
     private Boolean active;
     private LocalDate created;
     private LocalDate updated;
     private LocalDate completed;
-    private LocalDate deadLine;
+    private Date deadLine;
+
+    private String deadLinee;
+
+    private Boolean isPast;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn (name = "category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne
     @JoinColumn(name = "priority_id")
     private Priority priority;
 
+
+    public String getPriority (Priority priority) {
+        return "Task{" +
+                "priority=" + priority +
+                '}';
+    }
+
     //##############################################
 
+
+    public Boolean getPast() {
+        return isPast;
+    }
+
+    public void setPast(Boolean past) {
+        isPast = past;
+    }
 
     public Long getId() {
         return id;
@@ -80,6 +98,30 @@ public class Task {
         this.updated = updated;
     }
 
+    public LocalDate getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(LocalDate completed) {
+        this.completed = completed;
+    }
+
+    public Date getDeadLine() {
+        return deadLine;
+    }
+
+    public void setDeadLine(Date deadLine) {
+        this.deadLine = deadLine;
+    }
+
+    public String getDeadLinee() {
+        return deadLinee;
+    }
+
+    public void setDeadLinee(String deadLinee) {
+        this.deadLinee = deadLinee;
+    }
+
     public User getUser() {
         return user;
     }
@@ -102,22 +144,6 @@ public class Task {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
-    }
-
-    public LocalDate getCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(LocalDate completed) {
-        this.completed = completed;
-    }
-
-    public LocalDate getDeadLine() {
-        return deadLine;
-    }
-
-    public void setDeadLine(LocalDate deadLine) {
-        this.deadLine = deadLine;
     }
 
     @Override

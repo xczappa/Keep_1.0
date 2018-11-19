@@ -13,17 +13,20 @@
     <title>Login Form</title>
 </head>
 <body>
-
-<h1>Logowanie</h1>
+<br>
+<div align="center">
+<h2>Zaloguj się</h2>
 
 
 <form:form method="post" modelAttribute="loginDto">
-
-
     Login: <form:input path="login"/><br>
     Password: <form:password path="password"/><br>
-    <input type="submit" value="zaloguj sie">
+    <br>
+    <input type="submit" value="Zaloguj się">
 </form:form>
+    <br>
+    <a href="registration"> Nie masz konta? Zarejestruj się </a>
 
+</div>
 </body>
 </html>

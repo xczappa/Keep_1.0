@@ -54,7 +54,6 @@ public class CategoryController {
         return "redirect:/app/home";
     }
 
-
     //KASOWANIE
     @RequestMapping("/delete/{id}")
     public String deleteArticle(@PathVariable long id) {
@@ -69,7 +68,5 @@ public class CategoryController {
         model.addAttribute("category", category);
         return "form/category_form";
     }
-
-
 
 }

@@ -17,22 +17,22 @@
 
 <h3>Dodawanie/edycja ZADANIA</h3>
 
-
 <form:form action="/app/task/add" method="post" modelAttribute="task">
 
     <form:hidden path="id"/>
     <form:hidden path="created"/>
     <form:hidden path="active"/>
-    Wybierz kategorie: <form:select path="category" items="${categoriez}" itemLabel="title" itemValue="id"/><br>
+    <form:hidden path="completed"/>
+    Wybierz kategorie: <form:select path="category" items="${categoriez}" itemLabel="title" itemValue="id"/><br><br>
     Treść: <form:textarea cols="99" rows="1" path="text"/><br>
     <form:errors path="text"/><br>
-    Wybierz ownera: <form:select path="user" items="${userz}" itemValue="id" itemLabel="userName"/><br>
-    Określ priorytet: <form:select path="priority" items="${priorytiz}" itemLabel="title" itemValue="id"/><br>
-
+    Wybierz ownera: <form:select path="user" items="${userz}" itemValue="id" itemLabel="userName"/><br><br>
+    Określ priorytet: <form:select path="priority" items="${priorytiz}" itemLabel="title" itemValue="id"/><br><br>
+    Deadline: <form:input type="date" path="deadLinee"/><br><br>
+    <br>
     <input type="submit" value="ZAPISZ">
+
 </form:form>
-
-
 
 </body>
 </html>

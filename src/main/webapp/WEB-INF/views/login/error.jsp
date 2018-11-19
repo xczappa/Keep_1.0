@@ -8,14 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Errror</title>
+    <title>Login Error</title>
 </head>
 <body>
 
-<h1> podano zly login lub haslo </h1>
+<div align="center">
+    <br>
 
-<a href="/login"> Wroc do strony logowania </a>
+<h2> Podano zły login lub hasło </h2>
 
+<a href="/login"> Wróć do strony logowania </a> albo <a href="../registration"> Zarejestruj się </a>
+
+</div>
 
 </body>
 </html>

@@ -15,8 +15,12 @@ import pl.coderslab.repository.TaskRepository;
 import pl.coderslab.repository.UserRepository;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 
 @Controller
@@ -48,13 +52,44 @@ public class TaskController {
     public String addTask(@Valid Task task, BindingResult result) {
         if (result.hasErrors()) {
             return "form/task_form";
-        } else
-        if (task.getId() != null) {
+        } else if (task.getId() != null) {
             task.setUpdated(LocalDate.now());
+            String datee = task.getDeadLinee();
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            try {
+                task.setDeadLine(sdf.parse(datee));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (task.getDeadLine() != null) {
+                if (task.getDeadLine().before(new Date())) {
+                    task.setPast(true);
+                } else {
+                    task.setPast(false);
+                }
+            }
             taskRepository.save(task);
         } else {
             task.setCreated(LocalDate.now());
             task.setActive(true);
+            String datee = task.getDeadLinee();
+            String pattern = "yyyy-mm-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            try {
+                task.setDeadLine(sdf.parse(datee));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (new SimpleDateFormat("yyyy-MM-dd").parse(datee).before(new Date())) {
+                    task.setPast(true);
+                } else {
+                    task.setPast(false);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             taskRepository.save(task);
         }
         return "redirect:/app/home";
@@ -89,6 +124,22 @@ public class TaskController {
         model.addAttribute("task", task);
         return "form/task_form";
     }
+
+    //lista by user ID
+    @GetMapping(value = "/byUser/{id}")
+    public String byUserId(Model model, @PathVariable long id) {
+        List<Task> tasks = taskRepository.findAllByUserIdOrderByPriorityDesc(id);
+        model.addAttribute("tasks", tasks);
+        return "taskByUser";
+    }
+
+    //na glowna
+    @GetMapping(value = "/main")
+    public String main() {
+        return "redirect:/app/home";
+    }
+
+
 
 
     // listy potrzebne do formularzy

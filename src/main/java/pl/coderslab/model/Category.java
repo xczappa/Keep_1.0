@@ -17,11 +17,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
     @Size(min = 3, max = 20)
     private String title;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("active DESC, priority DESC")
     private List<Task> tasks = new ArrayList<>();
 

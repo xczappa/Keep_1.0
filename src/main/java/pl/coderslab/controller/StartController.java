@@ -15,6 +15,6 @@ public class StartController {
 
     @GetMapping
     public String goToLogin () {
-        return "redirect:/login";
+        return "welcome";
     }
 }
